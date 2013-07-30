@@ -1,0 +1,130 @@
+
+#lang scribble/manual
+ 
+@title{weather-service}
+@author{author+email "" ""}
+
+@section{Structs}
+ 
+Get a report of present weather and forecast data.
+
+
+@defproc[(make-weather [temp number?]
+			[dewpoint number?]
+			[humidity number?]
+			[wind-speed number?]
+			[wind-direction number?]
+			[description string?]
+			[image-url string?]
+			[visibility number?]
+			[windchill number?]
+			[pressure number?]) weather]{
+
+A structured representation the current weather.
+@itemlist[
+
+			@item{@racket[temp] --- The current temperature (in Fahrenheit).}
+
+			@item{@racket[dewpoint] --- The current dewpoint temperature (in Fahrenheit).}
+
+			@item{@racket[humidity] --- The current relative humidity (as a percentage).}
+
+			@item{@racket[wind-speed] --- The current wind speed (in miles-per-hour).}
+
+			@item{@racket[wind-direction] --- The current wind direction (in degrees).}
+
+			@item{@racket[description] --- A human-readable description of the current weather.}
+
+			@item{@racket[image-url] --- A url pointing to a picture that describes the weather.}
+
+			@item{@racket[visibility] --- How far you can see (in miles).}
+
+			@item{@racket[windchill] --- The perceived temperature (in Fahrenheit).}
+
+			@item{@racket[pressure] --- The barometric pressure (in inches).}]}
+
+@defproc[(make-forecast [period-name string?]
+			[period-time string?]
+			[temperature-label string?]
+			[temperature number?]
+			[probability-of-precipitation number?]
+			[description string?]
+			[image-url string?]
+			[long-description string?]) forecast]{
+
+A prediction for future weather.
+@itemlist[
+
+			@item{@racket[period-name] --- A human-readable name for this time period (e.g. Tonight or Saturday).}
+
+			@item{@racket[period-time] --- A string representing the time that this period starts. Encoded as YYYY-MM-DDTHH:MM:SS, where the T is not a number, but a always present character (e.g. 2013-07-30T18:00:00).}
+
+			@item{@racket[temperature-label] --- Either 'High' or 'Low', depending on whether or not the predicted temperature is a daily high or a daily low.}
+
+			@item{@racket[temperature] --- The predicted temperature for this period (in Fahrenheit).}
+
+			@item{@racket[probability-of-precipitation] --- The probability of precipitation for this period (as a percentage).}
+
+			@item{@racket[description] --- A human-readable description of the predicted weather for this period.}
+
+			@item{@racket[image-url] --- A url pointing to a picture that describes the predicted weather for this period.}
+
+			@item{@racket[long-description] --- A more-detailed, human-readable description of the predicted weather for this period.}]}
+
+@defproc[(make-location [latitude number?]
+			[longitude number?]
+			[elavation number?]
+			[name string?]) location]{
+
+A detailed description of a location
+@itemlist[
+
+			@item{@racket[latitude] --- The latitude (up-down) of this location.}
+
+			@item{@racket[longitude] --- The longitude (left-right) of this location.}
+
+			@item{@racket[elavation] --- The height above sea-level (in feet).}
+
+			@item{@racket[name] --- The city and state that this location is in.}]}
+
+@defproc[(make-report [weather weather?]
+			[forecasts (listof forecast?)]
+			[location location?]) report]{
+
+A container for the weather, forecasts, and location information.
+@itemlist[
+
+			@item{@racket[weather] --- The current weather for this location.}
+
+			@item{@racket[forecasts] --- The forecast for the next 7 days and 7 nights.}
+
+			@item{@racket[location] --- More detailed information on this location.}]}
+
+
+
+@section{Functions}
+
+@defproc[(disconnect-weather-service ) void]{
+
+Establishes that data will be retrieved locally.
+@itemlist[
+
+		]}
+
+@defproc[(connect-weather-service ) void]{
+
+Establishes that the online service will be used.
+@itemlist[
+
+		]}
+
+@defproc[(get-report [latitude number?]
+			[longitude number?]) report?]{
+
+Gets a report on the current weather, forecast, and more detailed information about the location.
+@itemlist[
+
+			@item{@racket[latitude] --- The latitude (up-down) of the location to get information about.}
+
+			@item{@racket[longitude] --- The longitude (left-right) of the location to get information about.}]}
+
