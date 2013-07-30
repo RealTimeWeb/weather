@@ -72,7 +72,7 @@ public class JsonWeatherService implements AbstractWeatherService {
 	 * @return String
 	 */
 	public String getReport(double latitude, double longitude) throws Exception {
-		String url = String.format("http://forecast.weather.gov/MapClick.php", );
+		String url = "http://forecast.weather.gov/MapClick.php";
 		HashMap<String, String> parameters = new HashMap<String, String>();
 		parameters.put("lat", String.valueOf(latitude));
 		parameters.put("lon", String.valueOf(longitude));

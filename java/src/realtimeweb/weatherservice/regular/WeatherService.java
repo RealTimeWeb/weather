@@ -97,7 +97,7 @@ public class WeatherService implements AbstractWeatherService {
 		    public void getReportCompleted(String response) {
 		        JsonParser parser = new JsonParser();
 		JsonObject top = parser.parse(response).getAsJsonObject();
-		        Report result = new Report(top, gson)
+		        Report result = new Report(top, gson);
 		        callback.getReportCompleted(result);
 		    }
 		});

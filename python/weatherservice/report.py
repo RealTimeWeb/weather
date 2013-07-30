@@ -32,6 +32,6 @@ class Report(object):
         :type json_data: dict
         :returns: Report
         """
-        return Report(Weather._from_json(json_data['data']['currentObservation']),
-                    map(Forecast._from_json, json_data['data']),
+        return Report(Weather._from_json(json_data['currentobservation']),
+                    Forecast._from_json(json_data),
                     Location._from_json(json_data['location']))

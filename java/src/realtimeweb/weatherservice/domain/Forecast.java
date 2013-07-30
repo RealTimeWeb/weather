@@ -215,5 +215,35 @@ public class Forecast {
 		this.imageUrl = imageUrl;
 		this.longDescription = longDescription;
 	}
+
+	public static ArrayList<Forecast> parse(JsonObject top, Gson gson) {
+		JsonObject rawTime = top.get("time").getAsJsonObject();
+		JsonObject rawData = top.get("data").getAsJsonObject();
+		
+		String[] periodNames = gson.fromJson(rawTime.get("startPeriodName").getAsJsonArray(), String[].class);
+		String[] periodTimes = gson.fromJson(rawTime.get("startValidTime").getAsJsonArray(), String[].class);
+		String[] tempLabels = gson.fromJson(rawTime.get("tempLabel").getAsJsonArray(), String[].class);
+		int[] temperatures = gson.fromJson(rawData.get("temperature").getAsJsonArray(), int[].class);
+		// POP is sometimes reported as "null", which means 0% chance. For your inconvenience :)
+		JsonArray pops_array = rawData.get("pop").getAsJsonArray();
+		int[] pops = new int[pops_array.size()];
+		for (int i = 0; i < pops.length; i+= 1) {
+			if (pops_array.get(i).isJsonNull()) {
+				pops[i] = 0;
+			} else {
+				pops[i] = pops_array.get(i).getAsInt();
+			}
+		}
+		String[] weather = gson.fromJson(rawData.get("weather").getAsJsonArray(), String[].class);
+		String[] icons = gson.fromJson(rawData.get("iconLink").getAsJsonArray(), String[].class);
+		String[] text = gson.fromJson(rawData.get("text").getAsJsonArray(), String[].class);
+
+		ArrayList<Forecast> forecasts = new ArrayList<Forecast>();
+		for (int i = 0; i < periodNames.length; i+= 1) {
+			forecasts.add(new Forecast(periodNames[i], periodTimes[i], tempLabels[i], 
+					temperatures[i], pops[i], weather[i], icons[i], text[i]));
+		}
+		return forecasts;
+	}
 	
 }

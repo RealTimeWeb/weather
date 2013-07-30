@@ -32,7 +32,7 @@ class Location(object):
         :type json_data: dict
         :returns: Location
         """
-        return Location(json_data['latitude'],
-                    json_data['longitude'],
-                    json_data['elevation'],
+        return Location(float(json_data['latitude']),
+                    float(json_data['longitude']),
+                    int(json_data['elevation']),
                     json_data['areaDescription'])

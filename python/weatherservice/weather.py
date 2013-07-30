@@ -50,13 +50,13 @@ class Weather(object):
         :type json_data: dict
         :returns: Weather
         """
-        return Weather(json_data['Temp'],
-                    json_data['Dewp'],
-                    json_data['Relh'],
-                    json_data['Winds'],
-                    json_data['Windd'],
+        return Weather(int(json_data['Temp']),
+                    int(json_data['Dewp']),
+                    int(json_data['Relh']),
+                    int(json_data['Winds']),
+                    int(json_data['Windd']),
                     json_data['Weather'],
                     json_data['Weatherimage'],
-                    json_data['Visibility'],
-                    json_data['WindChill'],
-                    json_data['SLP'])
+                    float(json_data['Visibility']),
+                    int(json_data['WindChill']),
+                    float(json_data['SLP']))

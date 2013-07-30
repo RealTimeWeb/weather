@@ -30,7 +30,10 @@ class Forecast(object):
         self.period_time = period_time
         self.temperature_label = temperature_label
         self.temperature = temperature
-        self.probability_of_precipitation = probability_of_precipitation
+        if probability_of_precipitation is None:
+            self.probability_of_precipitation = 0
+        else:
+            self.probability_of_precipitation = probability_of_precipitation
         self.description = description
         self.image_url = image_url
         self.long_description = long_description
@@ -44,11 +47,11 @@ class Forecast(object):
         :type json_data: dict
         :returns: Forecast
         """
-        return Forecast(json_data['time']['startPeriodName'],
+        return map(Forecast, json_data['time']['startPeriodName'],
                     json_data['time']['startValidTime'],
                     json_data['time']['tempLabel'],
-                    json_data['data']['temperature'],
-                    json_data['data']['pop'],
+                    map(int, json_data['data']['temperature']),
+                    map(int, json_data['data']['pop']),
                     json_data['data']['weather'],
                     json_data['data']['iconLink'],
                     json_data['data']['text'])

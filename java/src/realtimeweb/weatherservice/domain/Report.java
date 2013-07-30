@@ -93,8 +93,8 @@ public class Report {
 	 * @return 
 	 */
 	public  Report(JsonObject json, Gson gson) {
-		this.weather = new Weather(json.get("data").getAsJsonObject().get("currentObservation").getAsJsonObject(), gson);
-		this.forecasts = gson.fromJson(json.get("data").getAsJsonArray(), ArrayList<Forecast>.class);
+		this.weather = new Weather(json.get("currentobservation").getAsJsonObject(), gson);
+		this.forecasts = Forecast.parse(json.getAsJsonObject(), gson);
 		this.location = new Location(json.get("location").getAsJsonObject(), gson);
 	}
 	
