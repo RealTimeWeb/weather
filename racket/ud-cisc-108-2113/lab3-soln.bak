@@ -1,0 +1,31 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-intermediate-lambda-reader.ss" "lang")((modname lab3-soln) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ())))
+; Austin Cory Bart (acbart@vt.edu)
+
+; 1.1
+;; [Data Definition]
+(define-struct steb (pre post size))
+;; A STEB is (make-steb String String Number)
+;; interp of fields: 
+;; pre [String]: the text before the cursor
+;; name [String]: the text after the cursor
+;; price [Number]: the width of the box in pixels
+
+;; [CONSTRUCTOR] make-steb: String String Number --> Steb
+;; [SELECTORS] steb-pre: Steb --> String
+;; steb-post : Steb --> String
+;; steb-size : Steb --> Number
+;; [PREDICATE] steb?: ANY --> Boolean
+;;[Examples: you can use these in your unit tests]
+(define CD1 (make-cd "Game Theory" "Tinker to Evers to Chance" 19.95))
+(define CD2 (make-cd "New Order" "Get Ready" 12.89))
+;;[Function Template: functions that consume a CD can use this 
+part inventory]
+#| 
+(define (cd-fun acd)
+ ... (cd-artist acd) ;String
+ ... (cd-name acd) ;String
+ ... (cd-price acd) ;Number
+ )
+|#

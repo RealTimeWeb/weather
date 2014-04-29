@@ -1,6 +1,6 @@
-from weather import Weather
-from location import Location
-from forecast import Forecast
+from weatherservice.weather import Weather
+from weatherservice.location import Location
+from weatherservice.forecast import Forecast
 class Report(object):
     """
     A container for the weather, forecasts, and location information.

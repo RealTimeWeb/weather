@@ -1,6 +1,6 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-advanced-reader.ss" "lang")((modname weather-test) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #t #t none #f ())))
+#reader(lib "htdp-advanced-reader.ss" "lang")((modname offline-test) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #t #t none #f ())))
 (require 2htdp/image)
 (require "weather-service.rkt")
 
@@ -10,8 +10,6 @@
 ;(connect-weather-service)
 "Valid coordinates: 39.6836 -75.7500"
 (define report-online-valid (get-report 39.6836 -75.7500))
-(weather-wind-speed (report-weather report-online-valid))
-(error "test")
 (map forecast-temperature (report-forecasts report-online-valid))
 (map bitmap/url (map forecast-image-url (report-forecasts report-online-valid)))
 

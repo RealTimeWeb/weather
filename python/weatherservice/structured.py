@@ -1,9 +1,8 @@
-import requests
 import json
 import threading
-from _cache import _recursively_convert_unicode_to_str, lookup
-from report import Report
-import raw_json
+from weatherservice._cache import _recursively_convert_unicode_to_str, lookup
+from weatherservice.report import Report
+import weatherservice.raw_json as raw_json
 def connect():
     """
     Connect to the online data source in order to get up-to-date information.
@@ -28,7 +27,13 @@ def get_report(latitude, longitude):
     :type longitude: float
     :returns: dict
     """
-    return _recursively_convert_unicode_to_str(json.loads(raw_json.get_report(latitude, longitude)))
+    try:
+        report = raw_json.get_report(latitude, longitude)
+        json_report = json.loads(report.decode("utf-8"))
+        return _recursively_convert_unicode_to_str(json_report)
+    except Exception as e:
+        print(e)
+        print ("Bad response from the server. Check to make sure your arguments are right; especially that the location is within the United States.")
 
 def get_report_async(callback, error_callback, latitude, longitude):
     """
@@ -60,7 +65,7 @@ def get_report_async(callback, error_callback, latitude, longitude):
         """
         try:
             callback(get_report(latitude, longitude))
-        except Exception, e:
+        except Exception as e:
             error_callback(e)
     threading.Thread(target=server_call, args = (latitude, longitude)).start()
 

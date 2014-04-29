@@ -1,0 +1,1477 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <meta name="generator"
+    content="HTML Tidy for Linux/x86 (vers 25 March 2009), see www.w3.org" />
+    <meta http-equiv="content-type" content="text/html; charset=us-ascii" />
+    <title>Weather Service</title>
+    <link rel="stylesheet" type="text/css" href="scribble.css" title="default" />
+    <link rel="stylesheet" type="text/css" href="racket.css" title="default" />
+    <link rel="stylesheet" type="text/css" href="scribble-style.css" title="default" />
+    <script type="text/javascript" src="scribble-common.js"></script>
+    <!--[if IE 6]><style type="text/css">.SIEHidden { overflow: hidden; }</style><![endif]-->
+  </head>
+  <body id="scribble-racket-lang-org">
+    <div class="tocset">
+      <div class="tocview">
+        <div class="tocviewlist" style="margin-bottom: 1em;">
+          <div class="tocviewtitle">
+            <table cellspacing="0" cellpadding="0">
+              <tr>
+                <td style="width: 1em;">
+                  <a href="javascript:void(0);" title="Expand/Collapse"
+                  class="tocviewtoggle"
+                  onclick="TocviewToggle(this,&quot;tocview_0&quot;);">&#9658;</a>
+                </td>
+                <td></td>
+                <td>
+                  <a href="" class="tocviewselflink" data-pltdoc="x">Weather Service</a>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="tocviewsublistonly" style="display: none;" id="tocview_0">
+            <table cellspacing="0" cellpadding="0">
+              <tr>
+                <td align="right">1&nbsp;</td>
+                <td>
+                  <a href="#%28part._.Introduction%29" class="tocviewlink"
+                  data-pltdoc="x">Introduction</a>
+                </td>
+              </tr>
+              <tr>
+                <td align="right">2&nbsp;</td>
+                <td>
+                  <a href="#%28part._.Structs%29" class="tocviewlink"
+                  data-pltdoc="x">Structs</a>
+                </td>
+              </tr>
+              <tr>
+                <td align="right">3&nbsp;</td>
+                <td>
+                  <a href="#%28part._.License%29" class="tocviewlink"
+                  data-pltdoc="x">License</a>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="tocsub">
+        <table class="tocsublist" cellspacing="0">
+          <tr>
+            <td>
+              <span class="tocsublinknumber">1
+              <tt>&nbsp;</tt></span>
+              <a href="#(part._.Introduction)" class="tocsubseclink"
+              data-pltdoc="x">Introduction</a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="tocsublinknumber">1.1
+              <tt>&nbsp;</tt></span>
+              <a href="#(part._.Functions)" class="tocsubseclink"
+              data-pltdoc="x">Functions</a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a href="#(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-offline..rkt._get-weather))"
+              class="tocsubnonseclink" data-pltdoc="x">
+                <span title="Provided from: &quot;weather-service-online.rkt&quot;">
+                  <span class="RktSym">
+                    <span class="badlink">
+                    <span class="RktValLink">get-
+                    <wbr /></span>weather</span>
+                  </span>
+                </span>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="tocsublinknumber">2
+              <tt>&nbsp;</tt></span>
+              <a href="#(part._.Structs)" class="tocsubseclink"
+              data-pltdoc="x">Structs</a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a href="#(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._report))"
+              class="tocsubnonseclink" data-pltdoc="x">
+                <span title="Provided from: &quot;weather-service-online.rkt&quot;">
+                  <span class="RktSym">
+                    <span class="RktValLink">report</span>
+                  </span>
+                </span>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a href="#(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._weather))"
+              class="tocsubnonseclink" data-pltdoc="x">
+                <span title="Provided from: &quot;weather-service-online.rkt&quot;">
+                  <span class="RktSym">
+                    <span class="RktValLink">weather</span>
+                  </span>
+                </span>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a href="#(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._wind))"
+              class="tocsubnonseclink" data-pltdoc="x">
+                <span title="Provided from: &quot;weather-service-online.rkt&quot;">
+                  <span class="RktSym">
+                    <span class="RktValLink">wind</span>
+                  </span>
+                </span>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a href="#(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._forecast))"
+              class="tocsubnonseclink" data-pltdoc="x">
+                <span title="Provided from: &quot;weather-service-online.rkt&quot;">
+                  <span class="RktSym">
+                    <span class="RktValLink">forecast</span>
+                  </span>
+                </span>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a href="#(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._location))"
+              class="tocsubnonseclink" data-pltdoc="x">
+                <span title="Provided from: &quot;weather-service-online.rkt&quot;">
+                  <span class="RktSym">
+                    <span class="RktValLink">location</span>
+                  </span>
+                </span>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="tocsublinknumber">3
+              <tt>&nbsp;</tt></span>
+              <a href="#(part._.License)" class="tocsubseclink"
+              data-pltdoc="x">License</a>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="maincolumn">
+      <div class="main">
+        <div class="versionbox">
+          <span class="versionNoNav">2.0</span>
+        </div>
+        <h2>
+        <a name="(part._.Weather_.Service)"></a>Weather Service</h2>
+        <div class="SAuthorListBox">
+          <p class="author">
+            <span class="SAuthorList">Austin Cory Bart</span>
+          </p>
+        </div>
+        <div class="SIntrapara"></div>
+        <div class="SIntrapara">Austin Cory Bart &lt;
+        <a href="mailto:acbart@vt.edu">acbart@vt.edu</a>&gt;</div>
+        <h3>1
+        <tt>&nbsp;</tt>
+        <a name="(part._.Introduction)"></a>
+        <a name="(mod-path._.'weather-service-online..rkt.')"></a>
+        <a name="(mod-path._.'weather-service-offline..rkt.')"></a>Introduction</h3>
+        <p>This teachpack let&#8217;s you get the weather and forecast for a given
+        address. You can use it online, with live data:</p>
+        <table cellspacing="0" class="defmodule">
+          <tr>
+            <td>
+            <span class="hspace">&nbsp;</span>
+            <span class="RktPn">(</span>
+            <span class="RktSym">
+              <a href="file:///C:/Program%20Files%20(x86)/Racket/doc/reference/require.html#%28form._%28%28lib._racket%2Fprivate%2Fbase..rkt%29._require%29%29"
+              class="RktStxLink" data-pltdoc="x">require</a>
+            </span> 
+            <span class="RktVal">"weather-service-online.rkt"</span>
+            <span class="RktPn">)</span></td>
+          </tr>
+        </table>
+        <div class="SIntrapara">
+          <blockquote class="refpara">
+            <blockquote class="refcolumn">
+              <blockquote class="refcontent">
+                <p>Why would you use it offline? First, you don&#8217;t need an internet
+                connection. Second, you don&#8217;t have to worry about your tests
+                changing, since local data never changes (even though weather should
+                change daily!).</p>
+              </blockquote>
+            </blockquote>
+          </blockquote>
+        </div>
+        <div class="SIntrapara">or offline with local data:</div>
+        <table cellspacing="0" class="defmodule">
+          <tr>
+            <td>
+            <span class="hspace">&nbsp;</span>
+            <span class="RktPn">(</span>
+            <span class="RktSym">
+              <a href="file:///C:/Program%20Files%20(x86)/Racket/doc/reference/require.html#%28form._%28%28lib._racket%2Fprivate%2Fbase..rkt%29._require%29%29"
+              class="RktStxLink" data-pltdoc="x">require</a>
+            </span> 
+            <span class="RktVal">"weather-service-offline.rkt"</span>
+            <span class="RktPn">)</span></td>
+          </tr>
+        </table>
+        <h4>1.1
+        <tt>&nbsp;</tt>
+        <a name="(part._.Functions)"></a>Functions</h4>
+        <div class="SIntrapara">
+          <blockquote class="SVInsetFlow">
+            <table cellspacing="0" class="boxed RBoxed">
+              <tr>
+                <td>
+                  <blockquote class="SubFlow">
+                    <div class="RBackgroundLabel SIEHidden">
+                      <div class="RBackgroundLabelInner">
+                        <p>procedure</p>
+                      </div>
+                    </div>
+                    <p class="RForeground">
+                    <span class="RktPn">(</span>
+                    <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-offline..rkt._get-weather))"></a>
+                    <span title="Provided from: &quot;weather-service-online.rkt&quot;">
+                      <span class="RktSym">
+                        <span class="badlink">
+                          <span class="RktValLink">get-weather</span>
+                        </span>
+                      </span>
+                    </span>
+                    <span class="hspace">&nbsp;</span>
+                    <span class="RktVar">address</span>
+                    <span class="RktPn">)</span>
+                    <span class="hspace">&nbsp;</span>&#8594;
+                    <span class="hspace">&nbsp;</span>
+                    <span class="RktPn">(</span>
+                    <span class="RktSym">
+                      <a href="file:///C:/Program%20Files%20(x86)/Racket/doc/reference/data-structure-contracts.html#%28def._%28%28lib._racket%2Fcontract%2Fprivate%2Fmisc..rkt%29._or%2Fc%29%29"
+                      class="RktValLink" data-pltdoc="x">or/c</a>
+                    </span>
+                    <span class="hspace">&nbsp;</span>
+                    <span class="RktSym">
+                      <a href="file:///C:/Program%20Files%20(x86)/Racket/doc/reference/strings.html#%28def._%28%28quote._~23~25kernel%29._string~3f%29%29"
+                      class="RktValLink" data-pltdoc="x">string?</a>
+                    </span>
+                    <span class="hspace">&nbsp;</span>
+                    <span class="RktSym">
+                      <a href="#%28def._%28.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._report~3f%29%29"
+                      class="RktValLink" data-pltdoc="x">report?</a>
+                    </span>
+                    <span class="RktPn">)</span></p>
+                  </blockquote>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                <span class="hspace">&nbsp;&nbsp;</span>
+                <span class="RktVar">address</span>
+                <span class="hspace">&nbsp;</span>:
+                <span class="hspace">&nbsp;</span>
+                <span class="RktSym">
+                  <a href="file:///C:/Program%20Files%20(x86)/Racket/doc/reference/strings.html#%28def._%28%28quote._~23~25kernel%29._string~3f%29%29"
+                  class="RktValLink" data-pltdoc="x">string?</a>
+                </span></td>
+              </tr>
+            </table>
+          </blockquote>
+        </div>
+        <div class="SIntrapara">Gets a report on the current weather, the forecast, and
+        more detailed information about the given address, UNLESS there was an error, in
+        which case the error is returned as a string.</div>
+        <div class="SIntrapara">
+          <ul>
+            <li>
+              <p>
+              <span class="RktVar">address</span> &#8212;
+              <wbr /> An address in the United States, such as 
+              <span class="RktVal">"Seattle, WA"</span> or 
+              <span class="RktVal">"101 Smith Hall, Newark, DE 19716"</span>.</p>
+            </li>
+          </ul>
+        </div>
+        <div class="SIntrapara">When using the service offline, you should only use the
+        following addresses:</div>
+        <div class="SIntrapara">
+          <ul>
+            <li>
+              <p>
+                <span class="RktVal">"Newark, DE"</span>
+              </p>
+            </li>
+            <li>
+              <p>
+                <span class="RktVal">"Seattle, WA"</span>
+              </p>
+            </li>
+            <li>
+              <p>
+                <span class="RktVal">"Orlando, FL"</span>
+              </p>
+            </li>
+            <li>
+              <p>
+                <span class="RktVal">"Washington DC"</span>
+              </p>
+            </li>
+            <li>
+              <p>
+                <span class="RktVal">"Los Angeles, CA"</span>
+              </p>
+            </li>
+            <li>
+              <p>
+                <span class="RktVal">"Chicago, IL"</span>
+              </p>
+            </li>
+            <li>
+              <p>
+                <span class="RktVal">"Alaska"</span>
+              </p>
+            </li>
+          </ul>
+        </div>
+        <div class="SIntrapara">There are several reasons why 
+        <span class="RktSym">
+          <span class="badlink">
+            <span class="RktValLink">get-weather</span>
+          </span>
+        </span> might fail:</div>
+        <div class="SIntrapara">
+          <ul>
+            <li>
+              <p>The address might be outside of the United States.</p>
+            </li>
+            <li>
+              <p>There might have been no results found for the address (try it in Google
+              Maps to make sure it&#8217;s a real address)</p>
+            </li>
+            <li>
+              <p>If you&#8217;re using the offline version, the address may not be
+              available offline. You can try it with the online version.</p>
+            </li>
+          </ul>
+        </div>
+        <h3>2
+        <tt>&nbsp;</tt>
+        <a name="(part._.Structs)"></a>
+        <a name="(mod-path._.'weather-service-online..rkt.')"></a>Structs</h3>
+        <table cellspacing="0" class="defmodule">
+          <tr>
+            <td>
+            <span class="hspace">&nbsp;</span>
+            <span class="RktPn">(</span>
+            <span class="RktSym">
+              <a href="file:///C:/Program%20Files%20(x86)/Racket/doc/reference/require.html#%28form._%28%28lib._racket%2Fprivate%2Fbase..rkt%29._require%29%29"
+              class="RktStxLink" data-pltdoc="x">require</a>
+            </span> 
+            <span class="RktVal">"weather-service-online.rkt"</span>
+            <span class="RktPn">)</span></td>
+          </tr>
+        </table>
+        <div class="SIntrapara">
+          <blockquote class="SVInsetFlow">
+            <table cellspacing="0" class="boxed RBoxed">
+              <tr>
+                <td>
+                  <blockquote class="SubFlow">
+                    <div class="RBackgroundLabel SIEHidden">
+                      <div class="RBackgroundLabelInner">
+                        <p>struct</p>
+                      </div>
+                    </div>
+                    <table cellspacing="0" class="RForeground">
+                      <tr>
+                        <td>
+                          <span class="RktPn">(</span>
+                          <span class="RktSym">
+                            <a href="file:///C:/Program%20Files%20(x86)/Racket/doc/reference/define-struct.html#%28form._%28%28lib._racket%2Fprivate%2Fbase..rkt%29._struct%29%29"
+                            class="RktStxLink" data-pltdoc="x">struct</a>
+                          </span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                        <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._report-location))">
+                        </a>
+                        <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._report-day-after))"></a>
+                        <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._report-tomorrow))"></a>
+                        <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._report-tonight))"></a>
+                        <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._report-current))"></a>
+                        <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._make-report))"></a>
+                        <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._report~3f))"></a>
+                        <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._struct~3areport))"></a>
+                        <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._report))"></a>
+                        <span title="Provided from: &quot;weather-service-online.rkt&quot;">
+                          <span class="RktSym">
+                            <a href="#%28def._%28.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._report%29%29"
+                            class="RktValLink" data-pltdoc="x">report</a>
+                          </span>
+                        </span>
+                        <span class="hspace">&nbsp;</span>
+                        <span class="RktPn">(</span>
+                        <span class="RktSym">current</span> 
+                        <span class="RktSym">tonight</span> 
+                        <span class="RktSym">tomorrow</span> 
+                        <span class="RktSym">day-after</span> 
+                        <span class="RktSym">location</span>
+                        <span class="RktPn">)</span></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="RktPn">#:extra-constructor-name</span>
+                          <span class="hspace">&nbsp;</span>
+                          <span class="RktSym">
+                            <a href="#%28def._%28.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._make-report%29%29"
+                            class="RktValLink" data-pltdoc="x">make-report</a>
+                          </span>
+                          <span class="RktPn">)</span>
+                        </td>
+                      </tr>
+                    </table>
+                  </blockquote>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                <span class="hspace">&nbsp;&nbsp;</span>
+                <span class="RktSym">current</span>
+                <span class="hspace">&nbsp;</span>:
+                <span class="hspace">&nbsp;</span>
+                <span class="RktSym">
+                  <a href="#%28def._%28.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._weather~3f%29%29"
+                  class="RktValLink" data-pltdoc="x">weather?</a>
+                </span></td>
+              </tr>
+              <tr>
+                <td>
+                <span class="hspace">&nbsp;&nbsp;</span>
+                <span class="RktSym">tonight</span>
+                <span class="hspace">&nbsp;</span>:
+                <span class="hspace">&nbsp;</span>
+                <span class="RktSym">
+                  <a href="#%28def._%28.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._forecast~3f%29%29"
+                  class="RktValLink" data-pltdoc="x">forecast?</a>
+                </span></td>
+              </tr>
+              <tr>
+                <td>
+                <span class="hspace">&nbsp;&nbsp;</span>
+                <span class="RktSym">tomorrow</span>
+                <span class="hspace">&nbsp;</span>:
+                <span class="hspace">&nbsp;</span>
+                <span class="RktSym">
+                  <a href="#%28def._%28.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._forecast~3f%29%29"
+                  class="RktValLink" data-pltdoc="x">forecast?</a>
+                </span></td>
+              </tr>
+              <tr>
+                <td>
+                <span class="hspace">&nbsp;&nbsp;</span>
+                <span class="RktSym">day-after</span>
+                <span class="hspace">&nbsp;</span>:
+                <span class="hspace">&nbsp;</span>
+                <span class="RktSym">
+                  <a href="#%28def._%28.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._forecast~3f%29%29"
+                  class="RktValLink" data-pltdoc="x">forecast?</a>
+                </span></td>
+              </tr>
+              <tr>
+                <td>
+                <span class="hspace">&nbsp;&nbsp;</span>
+                <span class="RktSym">location</span>
+                <span class="hspace">&nbsp;</span>:
+                <span class="hspace">&nbsp;</span>
+                <span class="RktSym">
+                  <a href="#%28def._%28.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._location~3f%29%29"
+                  class="RktValLink" data-pltdoc="x">location?</a>
+                </span></td>
+              </tr>
+            </table>
+          </blockquote>
+        </div>
+        <div class="SIntrapara">A container for the weather, forecasts, and location
+        information.</div>
+        <div class="SIntrapara">
+          <ul>
+            <li>
+              <p>
+              <span class="RktSym">current</span> &#8212;
+              <wbr /> The current weather for this address.</p>
+            </li>
+            <li>
+              <p>
+              <span class="RktSym">tonight</span> &#8212;
+              <wbr /> The forecast for tonight.</p>
+            </li>
+            <li>
+              <p>
+              <span class="RktSym">tomorrow</span> &#8212;
+              <wbr /> The forecast for tomorrow.</p>
+            </li>
+            <li>
+              <p>
+              <span class="RktSym">day-after</span> &#8212;
+              <wbr /> The forecast for the day after tomorrow.</p>
+            </li>
+            <li>
+              <p>
+              <span class="RktSym">
+                <a href="#%28def._%28.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._location%29%29"
+                class="RktValLink" data-pltdoc="x">location</a>
+              </span> &#8212;
+              <wbr /> More detailed location information on this address.</p>
+            </li>
+          </ul>
+        </div>
+        <div class="SIntrapara">
+          <blockquote class="SVInsetFlow">
+            <table cellspacing="0" class="boxed RBoxed">
+              <tr>
+                <td>
+                  <blockquote class="SubFlow">
+                    <div class="RBackgroundLabel SIEHidden">
+                      <div class="RBackgroundLabelInner">
+                        <p>struct</p>
+                      </div>
+                    </div>
+                    <table cellspacing="0" class="RForeground">
+                      <colgroup>
+                        <col width="0*" />
+                        <col width="0*" />
+                        <col width="0*" />
+                        <col width="0*" />
+                        <col />
+                      </colgroup>
+                      <tr>
+                        <td>
+                          <span class="RktPn">(</span>
+                          <span class="RktSym">
+                            <a href="file:///C:/Program%20Files%20(x86)/Racket/doc/reference/define-struct.html#%28form._%28%28lib._racket%2Fprivate%2Fbase..rkt%29._struct%29%29"
+                            class="RktStxLink" data-pltdoc="x">struct</a>
+                          </span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="nobreak">
+                            <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._weather-image-url))">
+                            </a>
+                            <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._weather-description))"></a>
+                            <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._weather-wind))"></a>
+                            <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._weather-pressure))"></a>
+                            <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._weather-visibility))"></a>
+                            <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._weather-humidity))"></a>
+                            <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._weather-dewpoint))"></a>
+                            <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._weather-temperature))"></a>
+                            <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._make-weather))"></a>
+                            <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._weather~3f))"></a>
+                            <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._struct~3aweather))"></a>
+                            <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._weather))"></a>
+                            <span title="Provided from: &quot;weather-service-online.rkt&quot;">
+                              <span class="RktSym">
+                                <a href="#%28def._%28.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._weather%29%29"
+                                class="RktValLink" data-pltdoc="x">weather</a>
+                              </span>
+                            </span>
+                          </span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                          <span class="RktPn">(</span>
+                        </td>
+                        <td>
+                          <span class="nobreak">
+                            <span class="RktSym">temperature</span>
+                          </span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="RktSym">dewpoint</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="RktSym">humidity</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="RktSym">visibility</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="RktSym">pressure</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="RktSym">wind</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="RktSym">description</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="RktSym">image-url</span>
+                          <span class="RktPn">)</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td colspan="3">
+                          <span class="RktPn">#:extra-constructor-name</span>
+                          <span class="hspace">&nbsp;</span>
+                          <span class="RktSym">
+                            <a href="#%28def._%28.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._make-weather%29%29"
+                            class="RktValLink" data-pltdoc="x">make-weather</a>
+                          </span>
+                          <span class="RktPn">)</span>
+                        </td>
+                      </tr>
+                    </table>
+                  </blockquote>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                <span class="hspace">&nbsp;&nbsp;</span>
+                <span class="RktSym">temperature</span>
+                <span class="hspace">&nbsp;</span>:
+                <span class="hspace">&nbsp;</span>
+                <span class="RktSym">
+                  <a href="file:///C:/Program%20Files%20(x86)/Racket/doc/reference/number-types.html#%28def._%28%28quote._~23~25kernel%29._number~3f%29%29"
+                  class="RktValLink" data-pltdoc="x">number?</a>
+                </span></td>
+              </tr>
+              <tr>
+                <td>
+                <span class="hspace">&nbsp;&nbsp;</span>
+                <span class="RktSym">dewpoint</span>
+                <span class="hspace">&nbsp;</span>:
+                <span class="hspace">&nbsp;</span>
+                <span class="RktSym">
+                  <a href="file:///C:/Program%20Files%20(x86)/Racket/doc/reference/number-types.html#%28def._%28%28quote._~23~25kernel%29._number~3f%29%29"
+                  class="RktValLink" data-pltdoc="x">number?</a>
+                </span></td>
+              </tr>
+              <tr>
+                <td>
+                <span class="hspace">&nbsp;&nbsp;</span>
+                <span class="RktSym">humidity</span>
+                <span class="hspace">&nbsp;</span>:
+                <span class="hspace">&nbsp;</span>
+                <span class="RktSym">
+                  <a href="file:///C:/Program%20Files%20(x86)/Racket/doc/reference/number-types.html#%28def._%28%28quote._~23~25kernel%29._number~3f%29%29"
+                  class="RktValLink" data-pltdoc="x">number?</a>
+                </span></td>
+              </tr>
+              <tr>
+                <td>
+                <span class="hspace">&nbsp;&nbsp;</span>
+                <span class="RktSym">visibility</span>
+                <span class="hspace">&nbsp;</span>:
+                <span class="hspace">&nbsp;</span>
+                <span class="RktSym">
+                  <a href="file:///C:/Program%20Files%20(x86)/Racket/doc/reference/number-types.html#%28def._%28%28quote._~23~25kernel%29._number~3f%29%29"
+                  class="RktValLink" data-pltdoc="x">number?</a>
+                </span></td>
+              </tr>
+              <tr>
+                <td>
+                <span class="hspace">&nbsp;&nbsp;</span>
+                <span class="RktSym">pressure</span>
+                <span class="hspace">&nbsp;</span>:
+                <span class="hspace">&nbsp;</span>
+                <span class="RktSym">
+                  <a href="file:///C:/Program%20Files%20(x86)/Racket/doc/reference/number-types.html#%28def._%28%28quote._~23~25kernel%29._number~3f%29%29"
+                  class="RktValLink" data-pltdoc="x">number?</a>
+                </span></td>
+              </tr>
+              <tr>
+                <td>
+                <span class="hspace">&nbsp;&nbsp;</span>
+                <span class="RktSym">wind</span>
+                <span class="hspace">&nbsp;</span>:
+                <span class="hspace">&nbsp;</span>
+                <span class="RktSym">
+                  <a href="#%28def._%28.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._wind~3f%29%29"
+                  class="RktValLink" data-pltdoc="x">wind?</a>
+                </span></td>
+              </tr>
+              <tr>
+                <td>
+                <span class="hspace">&nbsp;&nbsp;</span>
+                <span class="RktSym">description</span>
+                <span class="hspace">&nbsp;</span>:
+                <span class="hspace">&nbsp;</span>
+                <span class="RktSym">
+                  <a href="file:///C:/Program%20Files%20(x86)/Racket/doc/reference/strings.html#%28def._%28%28quote._~23~25kernel%29._string~3f%29%29"
+                  class="RktValLink" data-pltdoc="x">string?</a>
+                </span></td>
+              </tr>
+              <tr>
+                <td>
+                <span class="hspace">&nbsp;&nbsp;</span>
+                <span class="RktSym">image-url</span>
+                <span class="hspace">&nbsp;</span>:
+                <span class="hspace">&nbsp;</span>
+                <span class="RktSym">
+                  <a href="file:///C:/Program%20Files%20(x86)/Racket/doc/reference/strings.html#%28def._%28%28quote._~23~25kernel%29._string~3f%29%29"
+                  class="RktValLink" data-pltdoc="x">string?</a>
+                </span></td>
+              </tr>
+            </table>
+          </blockquote>
+        </div>
+        <div class="SIntrapara">A structured representation the current weather.</div>
+        <div class="SIntrapara">
+          <ul>
+            <li>
+              <p>
+              <span class="RktSym">temp</span> &#8212;
+              <wbr /> The current temperature (in Fahrenheit).</p>
+            </li>
+            <li>
+              <p>
+              <span class="RktSym">dewpoint</span> &#8212;
+              <wbr /> The current dewpoint temperature (in Fahrenheit).</p>
+            </li>
+            <li>
+              <p>
+              <span class="RktSym">humidity</span> &#8212;
+              <wbr /> The current relative humidity (as a percentage).</p>
+            </li>
+            <li>
+              <p>
+              <span class="RktSym">visibility</span> &#8212;
+              <wbr /> How far you can see (in miles).</p>
+            </li>
+            <li>
+              <p>
+              <span class="RktSym">pressure</span> &#8212;
+              <wbr /> The barometric pressure (in inches).</p>
+            </li>
+            <li>
+              <p>
+              <span class="RktSym">
+                <a href="#%28def._%28.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._wind%29%29"
+                class="RktValLink" data-pltdoc="x">wind</a>
+              </span> &#8212;
+              <wbr /> The current wind pattern.</p>
+            </li>
+            <li>
+              <p>
+              <span class="RktSym">description</span> &#8212;
+              <wbr /> A human-readable description of the current weather.</p>
+            </li>
+            <li>
+              <p>
+              <span class="RktSym">image-url</span> &#8212;
+              <wbr /> A url pointing to a picture that describes the weather. Use 
+              <a href="http://docs.racket-lang.org/teachpack/2htdpimage.html#(def._((lib._2htdp/image..rkt)._bitmap/url))">
+
+                <span class="RktVal">"bitmap/url"</span>
+              </a> to convert it to an image.</p>
+            </li>
+          </ul>
+        </div>
+        <div class="SIntrapara">
+          <blockquote class="SVInsetFlow">
+            <table cellspacing="0" class="boxed RBoxed">
+              <tr>
+                <td>
+                  <blockquote class="SubFlow">
+                    <div class="RBackgroundLabel SIEHidden">
+                      <div class="RBackgroundLabelInner">
+                        <p>struct</p>
+                      </div>
+                    </div>
+                    <table cellspacing="0" class="RForeground">
+                      <tr>
+                        <td>
+                          <span class="RktPn">(</span>
+                          <span class="RktSym">
+                            <a href="file:///C:/Program%20Files%20(x86)/Racket/doc/reference/define-struct.html#%28form._%28%28lib._racket%2Fprivate%2Fbase..rkt%29._struct%29%29"
+                            class="RktStxLink" data-pltdoc="x">struct</a>
+                          </span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                        <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._wind-chill))">
+                        </a>
+                        <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._wind-direction))"></a>
+                        <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._wind-speed))"></a>
+                        <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._make-wind))"></a>
+                        <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._wind~3f))"></a>
+                        <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._struct~3awind))"></a>
+                        <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._wind))"></a>
+                        <span title="Provided from: &quot;weather-service-online.rkt&quot;">
+                          <span class="RktSym">
+                            <a href="#%28def._%28.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._wind%29%29"
+                            class="RktValLink" data-pltdoc="x">wind</a>
+                          </span>
+                        </span>
+                        <span class="hspace">&nbsp;</span>
+                        <span class="RktPn">(</span>
+                        <span class="RktSym">speed</span> 
+                        <span class="RktSym">direction</span> 
+                        <span class="RktSym">chill</span>
+                        <span class="RktPn">)</span></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="RktPn">#:extra-constructor-name</span>
+                          <span class="hspace">&nbsp;</span>
+                          <span class="RktSym">
+                            <a href="#%28def._%28.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._make-wind%29%29"
+                            class="RktValLink" data-pltdoc="x">make-wind</a>
+                          </span>
+                          <span class="RktPn">)</span>
+                        </td>
+                      </tr>
+                    </table>
+                  </blockquote>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                <span class="hspace">&nbsp;&nbsp;</span>
+                <span class="RktSym">speed</span>
+                <span class="hspace">&nbsp;</span>:
+                <span class="hspace">&nbsp;</span>
+                <span class="RktSym">
+                  <a href="file:///C:/Program%20Files%20(x86)/Racket/doc/reference/number-types.html#%28def._%28%28quote._~23~25kernel%29._number~3f%29%29"
+                  class="RktValLink" data-pltdoc="x">number?</a>
+                </span></td>
+              </tr>
+              <tr>
+                <td>
+                <span class="hspace">&nbsp;&nbsp;</span>
+                <span class="RktSym">direction</span>
+                <span class="hspace">&nbsp;</span>:
+                <span class="hspace">&nbsp;</span>
+                <span class="RktSym">
+                  <a href="file:///C:/Program%20Files%20(x86)/Racket/doc/reference/number-types.html#%28def._%28%28quote._~23~25kernel%29._number~3f%29%29"
+                  class="RktValLink" data-pltdoc="x">number?</a>
+                </span></td>
+              </tr>
+              <tr>
+                <td>
+                <span class="hspace">&nbsp;&nbsp;</span>
+                <span class="RktSym">chill</span>
+                <span class="hspace">&nbsp;</span>:
+                <span class="hspace">&nbsp;</span>
+                <span class="RktSym">
+                  <a href="file:///C:/Program%20Files%20(x86)/Racket/doc/reference/number-types.html#%28def._%28%28quote._~23~25kernel%29._number~3f%29%29"
+                  class="RktValLink" data-pltdoc="x">number?</a>
+                </span></td>
+              </tr>
+            </table>
+          </blockquote>
+        </div>
+        <div class="SIntrapara">A structured representation of wind.</div>
+        <div class="SIntrapara">
+          <ul>
+            <li>
+              <p>
+              <span class="RktSym">speed</span> &#8212;
+              <wbr /> The current wind speed (in miles-per-hour).</p>
+            </li>
+            <li>
+              <p>
+              <span class="RktSym">direction</span> &#8212;
+              <wbr /> The current wind direction (in degrees).</p>
+            </li>
+            <li>
+              <p>
+              <span class="RktSym">chill</span> &#8212;
+              <wbr /> The perceived temperature (in Fahrenheit) caused by the wind.</p>
+            </li>
+          </ul>
+        </div>
+        <div class="SIntrapara">
+          <blockquote class="SVInsetFlow">
+            <table cellspacing="0" class="boxed RBoxed">
+              <tr>
+                <td>
+                  <blockquote class="SubFlow">
+                    <div class="RBackgroundLabel SIEHidden">
+                      <div class="RBackgroundLabelInner">
+                        <p>struct</p>
+                      </div>
+                    </div>
+                    <table cellspacing="0" class="RForeground">
+                      <colgroup>
+                        <col width="0*" />
+                        <col width="0*" />
+                        <col width="0*" />
+                        <col width="0*" />
+                        <col />
+                      </colgroup>
+                      <tr>
+                        <td>
+                          <span class="RktPn">(</span>
+                          <span class="RktSym">
+                            <a href="file:///C:/Program%20Files%20(x86)/Racket/doc/reference/define-struct.html#%28form._%28%28lib._racket%2Fprivate%2Fbase..rkt%29._struct%29%29"
+                            class="RktStxLink" data-pltdoc="x">struct</a>
+                          </span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="nobreak">
+                            <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._forecast-long-description))">
+                            </a>
+                            <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._forecast-description))"></a>
+                            <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._forecast-image-url))"></a>
+                            <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._forecast-probability-of-precipitation))"></a>
+                            <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._forecast-temperature))"></a>
+                            <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._forecast-temperature-label))"></a>
+                            <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._make-forecast))"></a>
+                            <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._forecast~3f))"></a>
+                            <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._struct~3aforecast))"></a>
+                            <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._forecast))"></a>
+                            <span title="Provided from: &quot;weather-service-online.rkt&quot;">
+                              <span class="RktSym">
+                                <a href="#%28def._%28.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._forecast%29%29"
+                                class="RktValLink" data-pltdoc="x">forecast</a>
+                              </span>
+                            </span>
+                          </span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                          <span class="RktPn">(</span>
+                        </td>
+                        <td>
+                          <span class="nobreak">
+                            <span class="RktSym">temperature-label</span>
+                          </span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="RktSym">temperature</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="RktSym">probability-of-precipitation</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="RktSym">image-url</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="RktSym">description</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="RktSym">long-description</span>
+                          <span class="RktPn">)</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td colspan="3">
+                          <span class="RktPn">#:extra-constructor-name</span>
+                          <span class="hspace">&nbsp;</span>
+                          <span class="RktSym">
+                            <a href="#%28def._%28.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._make-forecast%29%29"
+                            class="RktValLink" data-pltdoc="x">make-forecast</a>
+                          </span>
+                          <span class="RktPn">)</span>
+                        </td>
+                      </tr>
+                    </table>
+                  </blockquote>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                <span class="hspace">&nbsp;&nbsp;</span>
+                <span class="RktSym">temperature-label</span>
+                <span class="hspace">&nbsp;</span>:
+                <span class="hspace">&nbsp;</span>
+                <span class="RktSym">
+                  <a href="file:///C:/Program%20Files%20(x86)/Racket/doc/reference/strings.html#%28def._%28%28quote._~23~25kernel%29._string~3f%29%29"
+                  class="RktValLink" data-pltdoc="x">string?</a>
+                </span></td>
+              </tr>
+              <tr>
+                <td>
+                <span class="hspace">&nbsp;&nbsp;</span>
+                <span class="RktSym">temperature</span>
+                <span class="hspace">&nbsp;</span>:
+                <span class="hspace">&nbsp;</span>
+                <span class="RktSym">
+                  <a href="file:///C:/Program%20Files%20(x86)/Racket/doc/reference/number-types.html#%28def._%28%28quote._~23~25kernel%29._number~3f%29%29"
+                  class="RktValLink" data-pltdoc="x">number?</a>
+                </span></td>
+              </tr>
+              <tr>
+                <td>
+                <span class="hspace">&nbsp;&nbsp;</span>
+                <span class="RktSym">probability-of-precipitation</span>
+                <span class="hspace">&nbsp;</span>:
+                <span class="hspace">&nbsp;</span>
+                <span class="RktSym">
+                  <a href="file:///C:/Program%20Files%20(x86)/Racket/doc/reference/number-types.html#%28def._%28%28quote._~23~25kernel%29._number~3f%29%29"
+                  class="RktValLink" data-pltdoc="x">number?</a>
+                </span></td>
+              </tr>
+              <tr>
+                <td>
+                <span class="hspace">&nbsp;&nbsp;</span>
+                <span class="RktSym">image-url</span>
+                <span class="hspace">&nbsp;</span>:
+                <span class="hspace">&nbsp;</span>
+                <span class="RktSym">
+                  <a href="file:///C:/Program%20Files%20(x86)/Racket/doc/reference/strings.html#%28def._%28%28quote._~23~25kernel%29._string~3f%29%29"
+                  class="RktValLink" data-pltdoc="x">string?</a>
+                </span></td>
+              </tr>
+              <tr>
+                <td>
+                <span class="hspace">&nbsp;&nbsp;</span>
+                <span class="RktSym">description</span>
+                <span class="hspace">&nbsp;</span>:
+                <span class="hspace">&nbsp;</span>
+                <span class="RktSym">
+                  <a href="file:///C:/Program%20Files%20(x86)/Racket/doc/reference/strings.html#%28def._%28%28quote._~23~25kernel%29._string~3f%29%29"
+                  class="RktValLink" data-pltdoc="x">string?</a>
+                </span></td>
+              </tr>
+              <tr>
+                <td>
+                <span class="hspace">&nbsp;&nbsp;</span>
+                <span class="RktSym">long-description</span>
+                <span class="hspace">&nbsp;</span>:
+                <span class="hspace">&nbsp;</span>
+                <span class="RktSym">
+                  <a href="file:///C:/Program%20Files%20(x86)/Racket/doc/reference/strings.html#%28def._%28%28quote._~23~25kernel%29._string~3f%29%29"
+                  class="RktValLink" data-pltdoc="x">string?</a>
+                </span></td>
+              </tr>
+            </table>
+          </blockquote>
+        </div>
+        <div class="SIntrapara">A prediction for future weather.</div>
+        <div class="SIntrapara">
+          <ul>
+            <li>
+              <p>
+              <span class="RktSym">temperature-label</span> &#8212;
+              <wbr /> Either 
+              <span class="RktVal">"High"</span> or 
+              <span class="RktVal">"Low"</span>, depending on whether or not the
+              predicted temperature is a daily high or a daily low.</p>
+            </li>
+            <li>
+              <p>
+              <span class="RktSym">temperature</span> &#8212;
+              <wbr /> The predicted temperature for this period (in Fahrenheit).</p>
+            </li>
+            <li>
+              <p>
+              <span class="RktSym">probability-of-precipitation</span> &#8212;
+              <wbr /> The probability of precipitation for this period (as a
+              percentage).</p>
+            </li>
+            <li>
+              <p>
+              <span class="RktSym">image-url</span> &#8212;
+              <wbr /> A url pointing to a picture that describes the predicted weather
+              for this period. Use 
+              <a href="http://docs.racket-lang.org/teachpack/2htdpimage.html#(def._((lib._2htdp/image..rkt)._bitmap/url))">
+
+                <span class="RktVal">"bitmap/url"</span>
+              </a> to convert it to an image.</p>
+            </li>
+            <li>
+              <p>
+              <span class="RktSym">description</span> &#8212;
+              <wbr /> A human-readable description of the predicted weather for this
+              period.</p>
+            </li>
+            <li>
+              <p>
+              <span class="RktSym">long-description</span> &#8212;
+              <wbr /> A more-detailed, human-readable description of the predicted
+              weather.</p>
+            </li>
+          </ul>
+        </div>
+        <div class="SIntrapara">
+          <blockquote class="SVInsetFlow">
+            <table cellspacing="0" class="boxed RBoxed">
+              <tr>
+                <td>
+                  <blockquote class="SubFlow">
+                    <div class="RBackgroundLabel SIEHidden">
+                      <div class="RBackgroundLabelInner">
+                        <p>struct</p>
+                      </div>
+                    </div>
+                    <table cellspacing="0" class="RForeground">
+                      <tr>
+                        <td>
+                          <span class="RktPn">(</span>
+                          <span class="RktSym">
+                            <a href="file:///C:/Program%20Files%20(x86)/Racket/doc/reference/define-struct.html#%28form._%28%28lib._racket%2Fprivate%2Fbase..rkt%29._struct%29%29"
+                            class="RktStxLink" data-pltdoc="x">struct</a>
+                          </span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                        <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._location-name))">
+                        </a>
+                        <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._location-elavation))"></a>
+                        <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._location-longitude))"></a>
+                        <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._location-latitude))"></a>
+                        <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._make-location))"></a>
+                        <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._location~3f))"></a>
+                        <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._struct~3alocation))"></a>
+                        <a name="(def._(.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._location))"></a>
+                        <span title="Provided from: &quot;weather-service-online.rkt&quot;">
+                          <span class="RktSym">
+                            <a href="#%28def._%28.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._location%29%29"
+                            class="RktValLink" data-pltdoc="x">location</a>
+                          </span>
+                        </span>
+                        <span class="hspace">&nbsp;</span>
+                        <span class="RktPn">(</span>
+                        <span class="RktSym">latitude</span> 
+                        <span class="RktSym">longitude</span> 
+                        <span class="RktSym">elavation</span> 
+                        <span class="RktSym">name</span>
+                        <span class="RktPn">)</span></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="hspace">&nbsp;</span>
+                        </td>
+                        <td>
+                          <span class="RktPn">#:extra-constructor-name</span>
+                          <span class="hspace">&nbsp;</span>
+                          <span class="RktSym">
+                            <a href="#%28def._%28.C~3a~5c.Users~5cacbart~5c.Projects~5c.Real.Time.Web~5c.Weather.Service~5cracket~5cud-cisc-108-2113~5cweather-service-online..rkt._make-location%29%29"
+                            class="RktValLink" data-pltdoc="x">make-location</a>
+                          </span>
+                          <span class="RktPn">)</span>
+                        </td>
+                      </tr>
+                    </table>
+                  </blockquote>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                <span class="hspace">&nbsp;&nbsp;</span>
+                <span class="RktSym">latitude</span>
+                <span class="hspace">&nbsp;</span>:
+                <span class="hspace">&nbsp;</span>
+                <span class="RktSym">
+                  <a href="file:///C:/Program%20Files%20(x86)/Racket/doc/reference/number-types.html#%28def._%28%28quote._~23~25kernel%29._number~3f%29%29"
+                  class="RktValLink" data-pltdoc="x">number?</a>
+                </span></td>
+              </tr>
+              <tr>
+                <td>
+                <span class="hspace">&nbsp;&nbsp;</span>
+                <span class="RktSym">longitude</span>
+                <span class="hspace">&nbsp;</span>:
+                <span class="hspace">&nbsp;</span>
+                <span class="RktSym">
+                  <a href="file:///C:/Program%20Files%20(x86)/Racket/doc/reference/number-types.html#%28def._%28%28quote._~23~25kernel%29._number~3f%29%29"
+                  class="RktValLink" data-pltdoc="x">number?</a>
+                </span></td>
+              </tr>
+              <tr>
+                <td>
+                <span class="hspace">&nbsp;&nbsp;</span>
+                <span class="RktSym">elavation</span>
+                <span class="hspace">&nbsp;</span>:
+                <span class="hspace">&nbsp;</span>
+                <span class="RktSym">
+                  <a href="file:///C:/Program%20Files%20(x86)/Racket/doc/reference/number-types.html#%28def._%28%28quote._~23~25kernel%29._number~3f%29%29"
+                  class="RktValLink" data-pltdoc="x">number?</a>
+                </span></td>
+              </tr>
+              <tr>
+                <td>
+                <span class="hspace">&nbsp;&nbsp;</span>
+                <span class="RktSym">name</span>
+                <span class="hspace">&nbsp;</span>:
+                <span class="hspace">&nbsp;</span>
+                <span class="RktSym">
+                  <a href="file:///C:/Program%20Files%20(x86)/Racket/doc/reference/strings.html#%28def._%28%28quote._~23~25kernel%29._string~3f%29%29"
+                  class="RktValLink" data-pltdoc="x">string?</a>
+                </span></td>
+              </tr>
+            </table>
+          </blockquote>
+        </div>
+        <div class="SIntrapara">A detailed description of a location</div>
+        <div class="SIntrapara">
+          <ul>
+            <li>
+              <p>
+              <span class="RktSym">latitude</span> &#8212;
+              <wbr /> The latitude (up-down) of this location.</p>
+            </li>
+            <li>
+              <p>
+              <span class="RktSym">longitude</span> &#8212;
+              <wbr /> The longitude (left-right) of this location.</p>
+            </li>
+            <li>
+              <p>
+              <span class="RktSym">elavation</span> &#8212;
+              <wbr /> The height above sea-level (in feet).</p>
+            </li>
+            <li>
+              <p>
+              <span class="RktSym">name</span> &#8212;
+              <wbr /> The city and state that this location is in.</p>
+            </li>
+          </ul>
+        </div>
+        <h3>3
+        <tt>&nbsp;</tt>
+        <a name="(part._.License)"></a>License</h3>
+        <p>Copyright (c) 2013, Virginia Tech and Austin Cory Bart. All rights
+        reserved.</p>
+        <p>Redistribution and use in source and binary forms, with or without
+        modification, are permitted provided that the following conditions are met:</p>
+        <div class="SIntrapara">
+          <ul>
+            <li>
+              <p>Redistributions of source code must retain the above copyright notice,
+              this list of conditions and the following disclaimer.</p>
+            </li>
+            <li>
+              <p>Redistributions in binary form must reproduce the above copyright
+              notice, this list of conditions and the following disclaimer in the
+              documentation and/or other materials provided with the distribution.</p>
+            </li>
+          </ul>
+        </div>
+        <div class="SIntrapara">THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND
+        CONTRIBUTORS &#8220;AS IS&#8221; AND ANY EXPRESS OR IMPLIED WARRANTIES,
+        INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+        FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+        HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+        EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT
+        OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+        INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+        STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+        OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+        DAMAGE.</div>
+      </div>
+    </div>
+    <div id="contextindicator">&nbsp;</div>
+  </body>
+</html>

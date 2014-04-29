@@ -1,3 +1,15 @@
+def parse_int(value, default=0):
+    try:
+        return int(value)
+    except ValueError:
+        return default
+def parse_float(value, default=0):
+    try:
+        return float(value)
+    except ValueError:
+        return default
+
+
 class Forecast(object):
     """
     A prediction for future weather.
@@ -50,8 +62,8 @@ class Forecast(object):
         return map(Forecast, json_data['time']['startPeriodName'],
                     json_data['time']['startValidTime'],
                     json_data['time']['tempLabel'],
-                    map(int, json_data['data']['temperature']),
-                    map(int, json_data['data']['pop']),
+                    map(parse_int, json_data['data']['temperature']),
+                    map(lambda x : parse_int(x) if x is not None else 0, json_data['data']['pop']),
                     json_data['data']['weather'],
                     json_data['data']['iconLink'],
                     json_data['data']['text'])

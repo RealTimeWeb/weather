@@ -1,10 +1,25 @@
-import requests
+try:
+    import urllib2
+    PYTHON_3 = False
+except:
+    import urllib.request as request
+    PYTHON_3 = True
 import json
 import threading
-from _cache import _recursively_convert_unicode_to_str, lookup
-from report import Report
-import _cache
+from weatherservice._cache import _recursively_convert_unicode_to_str, lookup
+from weatherservice.report import Report
+import weatherservice._cache as cache
 _using_cache = False
+
+def get(url):
+    if PYTHON_3:
+        response = request.urlopen(url)
+        return response.read()
+    else:
+        req = urllib2.Request(url)
+        response = urllib2.urlopen(req)
+        return response.read()
+
 def connect():
     """
     Connect to the online data source in order to get up-to-date information.
@@ -39,8 +54,8 @@ def get_report(latitude, longitude):
         result = cache.lookup(("http://forecast.weather.gov/MapClick.php") + "%{lat=" + str(latitude)+ "}""%{lon=" + str(longitude)+ "}")
         return result
     else:
-        result = requests.get("http://forecast.weather.gov/MapClick.php", params = {"FcstType" : "json", "lat" : str(latitude), "lon" : str(longitude)})
-        return result.text
+        result = get("http://forecast.weather.gov/MapClick.php?FcstType=json&lat={}&lon={}".format(str(latitude),str(longitude)))
+        return result
 
 def get_report_async(callback, error_callback, latitude, longitude):
     """
@@ -72,7 +87,7 @@ def get_report_async(callback, error_callback, latitude, longitude):
         """
         try:
             callback(get_report(latitude, longitude))
-        except Exception, e:
+        except Exception as e:
             error_callback(e)
     threading.Thread(target=server_call, args = (latitude, longitude)).start()
 

@@ -1,9 +1,8 @@
-import requests
 import json
 import threading
-from _cache import _recursively_convert_unicode_to_str, lookup
-from report import Report
-import structured
+from weatherservice._cache import _recursively_convert_unicode_to_str, lookup
+from weatherservice.report import Report
+import weatherservice.structured as structured
 def connect():
     """
     Connect to the online data source in order to get up-to-date information.
@@ -60,7 +59,7 @@ def get_report_async(callback, error_callback, latitude, longitude):
         """
         try:
             callback(get_report(latitude, longitude))
-        except Exception, e:
+        except Exception as e:
             error_callback(e)
     threading.Thread(target=server_call, args = (latitude, longitude)).start()
 

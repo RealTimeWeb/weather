@@ -1,3 +1,15 @@
+def parse_int(value, default=0):
+    try:
+        return int(value)
+    except ValueError:
+        return default
+def parse_float(value, default=0):
+    try:
+        return float(value)
+    except ValueError:
+        return default
+
+
 class Weather(object):
     """
     A structured representation the current weather.
@@ -50,13 +62,13 @@ class Weather(object):
         :type json_data: dict
         :returns: Weather
         """
-        return Weather(int(json_data['Temp']),
-                    int(json_data['Dewp']),
-                    int(json_data['Relh']),
-                    int(json_data['Winds']),
-                    int(json_data['Windd']),
-                    json_data['Weather'],
-                    json_data['Weatherimage'],
-                    float(json_data['Visibility']),
-                    int(json_data['WindChill']),
-                    float(json_data['SLP']))
+        return Weather(parse_int(json_data.get('Temp', 0)),
+                    parse_int(json_data.get('Dewp', 0)),
+                    parse_int(json_data.get('Relh', 0)),
+                    parse_int(json_data.get('Winds', 0)),
+                    parse_int(json_data.get('Windd', 0)),
+                    json_data.get('Weather', ''),
+                    json_data.get('Weatherimage', ''),
+                    parse_float(json_data.get('Visibility', 0.0)),
+                    parse_int(json_data.get('WindChill', 0)),
+                    parse_float(json_data.get('SLP', 0.0)))
