@@ -87,7 +87,24 @@ def _from_json(data):
 
 _CACHE = {}
 _CACHE_COUNTER = {}
+_EDITABLE = False
 _CONNECTED = False
+_PATTERN = "empty"
+def _start_editing(pattern=_PATTERN):
+    """
+    Start adding seen entries to the cache. So, every time that you make a request,
+    it will be saved to the cache. You must :ref:`_save_cache` to save the
+    newly edited cache to disk, though!
+    """
+    global _EDITABLE, _PATTERN
+    _EDITABLE = True
+    _PATTERN = pattern
+def _stop_editing():
+    """
+    Stop adding seen entries to the cache.
+    """
+    global _EDITABLE
+    _EDITABLE = False
 def connect():
     """
     Connect to the online data source in order to get up-to-date information.
@@ -95,14 +112,17 @@ def connect():
     """
     global _CONNECTED
     _CONNECTED = True
-def disconnect(filename="cache.json"):
+def disconnect(filename="weatherservice/cache.json"):
     """
     Connect to the local cache, so no internet connection is required.
     :returns: void
     """
     global _CONNECTED, _CACHE
-    with open(filename, 'r') as f:
-        _CACHE = _recursively_convert_unicode_to_str(json.load(f))['data']
+    try:
+        with open(filename, 'r') as f:
+            _CACHE = _recursively_convert_unicode_to_str(json.load(f))['data']
+    except FileNotFoundError:
+        raise WeatherException("The cache file '{}' was not found.".format(filename))
     for key in _CACHE.keys():
         _CACHE_COUNTER[key] = 0
     _CONNECTED = False
@@ -123,16 +143,29 @@ def _lookup(key):
         elif _CACHE[key][0] == "repeat":
             return ""
         else:
-            _CACHE_COUNTER[key] = 0
+            _CACHE_COUNTER[key] = 1
     else:
         _CACHE_COUNTER[key] += 1
     if _CACHE[key]:
-        return _CACHE[key][1+_CACHE_COUNTER]
+        return _CACHE[key][_CACHE_COUNTER[key]]
     else:
         return ""
-    
-def _save_cache(filename="cache.json"):
-    json.dump(_CACHE, filename)
+def _add_to_cache(key, value):
+    """
+    Internal method to add a new key-value to the local cache.
+    :param str key: The new url to add to the cache
+    :param str value: The HTTP response for this key.
+    :returns: void
+    """
+    if key in _CACHE:
+        _CACHE[key].append(value)
+    else:
+        _CACHE[key] = [_PATTERN, value]
+        _CACHE_COUNTER[key] = 0
+        
+def _save_cache(filename="weatherservice/cache.json"):
+    with open(filename, 'w') as f:
+        json.dump({"data": _CACHE, "metadata": ""}, f)
         
 ################################################################################
 # Domain Objects
@@ -373,6 +406,8 @@ def _get_report_string(latitude,longitude):
     """
     key = _get_report_request(latitude, longitude)
     result = _get(key) if _CONNECTED else _lookup(key)
+    if _CONNECTED and _EDITABLE:
+        _add_to_cache(key, result)
     return result
     
 def get_report_as_dict(latitude,longitude):
@@ -436,6 +471,8 @@ def _geocode(address):
     """
     key = _geocode_request(address)
     result = _get(key) if _CONNECTED else _lookup(key)
+    if _CONNECTED and _EDITABLE:
+        _add_to_cache(key, result)
     return result
 
 GEOCODE_ERRORS = {"REQUEST_DENIED": "The given address was denied.",

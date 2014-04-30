@@ -6,49 +6,56 @@
 Welcome to weatherservice's documentation!
 ==========================================
 
-Contents:
+The WeatherService library offers access to the National Weather Service for the
+United States. You can either get information via latitude and longitude, or
+by passing in an address (which will be geocoded through Google). This library
+can work online (connected) or offline (disconnected). When offline, only certain
+addresses are available.
 
-.. toctree::
-   :maxdepth: 2
+>>> from weatherservice import weatherservice
+>>> weatherservice.connect()
+>>> report = weatherservice.get_report("New York, NY")
+>>> report
+<weatherservice.weatherservice.Report object>
+>>> report.weather.temp
+41
+>>> weatherservice.get_report("Tokoyo, China")
+weatherservice.weatherservice.WeatherException: This city was outside of the continental United States.
+>>> weatherservice.disconnect()
+>>> weatherservice.get_report("New York, NY").weather.temp
+88
+>>> weatherservice.get_report("Newark, DE")
+weatherservice.weatherservice.GeocodeException: The given city was not in the cache.
+   
+Methods
+----------------
+
+.. autofunction:: weatherservice.connect
+
+.. autofunction:: weatherservice.disconnect
+    
+.. autofunction:: weatherservice.get_report
+
+.. autofunction:: weatherservice.get_report_by_latlng
 
 Data Classes
 ------------
 
-.. autoclass:: weatherservice.report.Report
+.. autoclass:: weatherservice.Report
     :members:
     :special-members: __init__
     
-.. autoclass:: weatherservice.weather.Weather
+.. autoclass:: weatherservice.Weather
     :members:
     :special-members: __init__
     
-.. autoclass:: weatherservice.location.Location
+.. autoclass:: weatherservice.Location
     :members:
     :special-members: __init__
     
-.. autoclass:: weatherservice.forecast.Forecast
+.. autoclass:: weatherservice.Forecast
     :members:
     :special-members: __init__
-    
-Raw JSON Service
-----------------
-    
-.. automodule:: weatherservice.raw_json
-    :members:
-    
-Structured Data Service
------------------------
-
-.. automodule:: weatherservice.structured
-    :members:
-    
-Object-Oriented Regular Service
--------------------------------
-
-.. automodule:: weatherservice.regular
-    :members:
-
-
 
 Indices and tables
 ==================
