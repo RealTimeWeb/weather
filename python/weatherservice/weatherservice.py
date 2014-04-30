@@ -53,7 +53,7 @@ def _get(url):
     """
     if PYTHON_3:
         response = request.urlopen(url)
-        return response.read()
+        return response.read().decode('utf-8')
     else:
         req = urllib2.Request(url)
         response = urllib2.urlopen(req)
@@ -101,7 +101,8 @@ def disconnect(filename="cache.json"):
     :returns: void
     """
     global _CONNECTED, _CACHE
-    _CACHE = _recursively_convert_unicode_to_str(json.load(open(filename, 'r')))['data']
+    with open(filename, 'r') as f:
+        _CACHE = _recursively_convert_unicode_to_str(json.load(f))['data']
     for key in _CACHE.keys():
         _CACHE_COUNTER[key] = 0
     _CONNECTED = False

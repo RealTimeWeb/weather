@@ -1,9 +1,9 @@
-import weatherservice
+import weatherservice.weatherservice as weatherservice
 import unittest
 
 class TestWeatherServiceOffline(unittest.TestCase):
     def setUp(self):
-        weatherservice.disconnect("cache.json")
+        weatherservice.disconnect("weatherservice/cache.json")
     
     def test_china(self):
         with self.assertRaises(weatherservice.GeocodeException):
