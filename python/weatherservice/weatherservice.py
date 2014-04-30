@@ -4,14 +4,14 @@ PYTHON_3 = sys.version_info >= (3, 0)
 
 import urllib
 if PYTHON_3:
-    import urllib2
+    import urllib.request as request
     from urllib.parse import quote_plus
 else:
-    import urllib.request as request
+    import urllib2
     from urllib import quote_plus
     
-import json
-import threading
+try: import simplejson as json
+except ImportError: import json
 
 ################################################################################
 # Auxilary
@@ -22,7 +22,7 @@ def urlencode(query, params):
     Correctly convert the given query and parameters into a full query+query
     string, ensuring the order of the params.
     """
-    return query + '?' + "&".join(key+'='+urllib.quote_plus(value) 
+    return query + '?' + "&".join(key+'='+quote_plus(str(value)) 
                                   for key, value in params)
 
 def _parse_int(value, default=0):
@@ -93,17 +93,17 @@ def connect():
     Connect to the online data source in order to get up-to-date information.
     :returns: void
     """
+    global _CONNECTED
     _CONNECTED = True
 def disconnect(filename="cache.json"):
     """
     Connect to the local cache, so no internet connection is required.
     :returns: void
     """
-    _CACHE = _recursively_convert_unicode_to_str(json.load(open(filename, r)))
-    for key in CACHE.keys():
+    global _CONNECTED, _CACHE
+    _CACHE = _recursively_convert_unicode_to_str(json.load(open(filename, 'r')))['data']
+    for key in _CACHE.keys():
         _CACHE_COUNTER[key] = 0
-        _CACHE_PATTERN[key] = _CACHE[key][0]
-        _CACHE_DATA[key] = _CACHE[key][1:]
     _CONNECTED = False
 def _lookup(key):
     """
@@ -112,6 +112,8 @@ def _lookup(key):
     :type key: string
     :returns: void
     """
+    if key not in _CACHE:
+        return ""
     if _CACHE_COUNTER[key] >= len(_CACHE[key][1:]):
         if _CACHE[key][0] == "empty":
             return ""
@@ -169,8 +171,8 @@ class Location(object):
         :type json_data: dict
         :returns: Location
         """
-        return Location(_parse_float(json_data.get('latitude', 0.0),
-                        _parse_float(json_data.get('longitude', 0.0),
+        return Location(_parse_float(json_data.get('latitude', 0.0)),
+                        _parse_float(json_data.get('longitude', 0.0)),
                         _parse_int(json_data.get('elevation', 0)),
                         json_data.get('areaDescription', ''))
 
@@ -331,6 +333,13 @@ class Report(object):
                     Location._from_json(json_data['location']))
                     
 ################################################################################
+# Exceptions
+################################################################################
+class GeocodeException(Exception):
+    pass
+class WeatherException(Exception):
+    pass
+################################################################################
 # Service call
 ################################################################################
 
@@ -380,7 +389,7 @@ def get_report_as_dict(latitude,longitude):
     result = _get_report_string(latitude, longitude)
     return _from_json(result)
 
-def get_report(latitude,longitude):
+def get_report_by_latlng(latitude,longitude):
     """
     Gets a report on the current weather, forecast, and more detailed information about the location.
     
@@ -393,5 +402,77 @@ def get_report(latitude,longitude):
     :returns: Report
     """
     result = _get_report_string(latitude,longitude)
-    return Report._from_json(_from_json(result))
+    if result:
+        try:
+            json_result = _from_json(result)
+        except ValueError:
+            raise WeatherException("This city was outside of the continental United States.")
+        report = Report._from_json(json_result)
+        return report
+    else:
+        if _CONNECTED:
+            raise WeatherException("No response from the server.")
+        else:
+            raise WeatherException("No data was in the cache for this location.")
     
+def _geocode_request(address):
+    """
+    Used to build the request string used by :func:`geocode`.
+    
+    :param str address: A location (e.g., "Newark, DE") somewhere in the United States
+    :returns: str
+    """
+    address = address.lower()
+    arguments = [("address", address), ("sensor", "true")]
+    return urlencode("http://maps.googleapis.com/maps/api/geocode/json", arguments)
+    
+def _geocode(address):
+    """
+    Like :func:`geocode` except returns the raw data instead.
+    
+    :param str address: A location (e.g., "Newark, DE") somewhere in the United States
+    :returns: str
+    """
+    key = _geocode_request(address)
+    result = _get(key) if _CONNECTED else _lookup(key)
+    return result
+
+GEOCODE_ERRORS = {"REQUEST_DENIED": "The given address was denied.",
+				  "ZERO_RESULTS": "The given address could not be found.",
+				  "OVER_QUERY_LIMIT": "The service has been used too many times today.",
+				  "INVALID_REQUEST": "The given address was invalid.",
+				  "UNKNOWN_ERROR": "A temporary error occurred; please try again.",
+				  "UNAVAILABLE": "The given address is not available offline."}
+
+def get_report(address):
+    """
+    Gets a report on the current weather, forecast, and more detailed information about the location.
+    
+    :param str address: A location (e.g., "Newark, DE") somewhere in the United States
+    :returns: lat, long
+    """
+    response = _geocode(address)
+    if response == "":
+        if _CONNECTED:
+            raise GeocodeException("Nothing was returned from the server.")
+        else:
+            raise GeocodeException("The given city was not in the cache.")
+    try:
+        geocode_data = _from_json(response)
+    except ValueError:
+        raise GeocodeException("The response from the Server was invalid. Perhaps the internet is down?")
+    status = geocode_data.get('status', 'INVALID_RETURN')
+    if status == 'OK':
+        try:
+            results = geocode_data['results']
+            if results:
+                location = results[0]['geometry']['location']
+                latitude = location['lat']
+                longitude = location['lng']
+            else:
+                raise GeocodeException("The address could not be found; check that it's valid on Google Maps.")
+        except KeyError:
+            raise GeocodeException("The response from the Geocode server was invalid. Perhaps this wasn't a valid address?")
+        return get_report_by_latlng(latitude, longitude)
+    else:
+        raise GeocodeException(GEOCODE_ERRORS.get(status, "Unknown error occurred: "+status))
