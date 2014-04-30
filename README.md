@@ -12,4 +12,4 @@ Usage is very simple:
     print "Today's temperature", report.weather.temp
     
     
-Online documentation is available: http://mickey.cs.vt.edu/static/resources/weather/python/index.html
+Online documentation is available: http://mickey.cs.vt.edu/realtimeweb/static/resources/weather/python/index.html
