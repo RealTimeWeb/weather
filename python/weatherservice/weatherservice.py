@@ -1,7 +1,5 @@
 import sys
-
 PYTHON_3 = sys.version_info >= (3, 0)
-
 import urllib
 if PYTHON_3:
     import urllib.request as request
@@ -9,9 +7,10 @@ if PYTHON_3:
 else:
     import urllib2
     from urllib import quote_plus
-    
-try: import simplejson as json
-except ImportError: import json
+try:
+    import simplejson as json
+except ImportError:
+    import json
 
 ################################################################################
 # Auxilary
@@ -373,6 +372,13 @@ class GeocodeException(Exception):
     pass
 class WeatherException(Exception):
     pass
+
+GEOCODE_ERRORS = {"REQUEST_DENIED": "The given address was denied.",
+				  "ZERO_RESULTS": "The given address could not be found.",
+				  "OVER_QUERY_LIMIT": "The service has been used too many times today.",
+				  "INVALID_REQUEST": "The given address was invalid.",
+				  "UNKNOWN_ERROR": "A temporary error occurred; please try again.",
+				  "UNAVAILABLE": "The given address is not available offline."}
 ################################################################################
 # Service call
 ################################################################################
@@ -474,13 +480,6 @@ def _geocode(address):
     if _CONNECTED and _EDITABLE:
         _add_to_cache(key, result)
     return result
-
-GEOCODE_ERRORS = {"REQUEST_DENIED": "The given address was denied.",
-				  "ZERO_RESULTS": "The given address could not be found.",
-				  "OVER_QUERY_LIMIT": "The service has been used too many times today.",
-				  "INVALID_REQUEST": "The given address was invalid.",
-				  "UNKNOWN_ERROR": "A temporary error occurred; please try again.",
-				  "UNAVAILABLE": "The given address is not available offline."}
 
 def get_report(address):
     """
