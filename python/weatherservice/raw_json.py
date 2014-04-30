@@ -39,6 +39,16 @@ def disconnect():
     global _using_cache
     cache.unload()
     _using_cache = False
+    
+def geocode(latitude, longitude):
+    """
+    """
+    if _using_cache:
+        result = cache.lookup("")
+        return result
+    else:
+        result = get("")
+        return result
 
 def get_report(latitude, longitude):
     """
