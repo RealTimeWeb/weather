@@ -8,7 +8,7 @@ can work online (connected) or offline (disconnected). When offline, only certai
 addresses are available.
 
 >>> from weatherservice import weatherservice
->>> weatherservice.connect()
+>>> weatherservice.connect() #Starts offline by default
 >>> report = weatherservice.get_report("New York, NY")
 >>> report
 <weatherservice.weatherservice.Report object>
@@ -21,3 +21,7 @@ weatherservice.weatherservice.WeatherException: This city was outside of the con
 88
 >>> weatherservice.get_report("Newark, DE")
 weatherservice.weatherservice.GeocodeException: The given city was not in the cache.
+
+
+To run the unit tests from the command line:
+>>> python -m tests.test
