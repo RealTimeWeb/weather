@@ -24,4 +24,5 @@ weatherservice.weatherservice.GeocodeException: The given city was not in the ca
 
 
 To run the unit tests from the command line:
+
 >>> python -m tests.test
