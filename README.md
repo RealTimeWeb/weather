@@ -1,15 +1,8 @@
-WeatherService
-==============
+Weather
+=======
 
-Get the weather for a region, or get long-term forecasts.
-
-Usage is very simple:
-
-    import weatherservice.regular as weatherservice
-
-    # Consumes latitude, longitudes
-    report = weatherservice.get_report(92, 40)
-    print "Today's temperature", report.weather.temp
+Get the weather for a region within the United States, or get long-term forecasts.
     
-    
-Online documentation is available: http://mickey.cs.vt.edu/realtimeweb/static/resources/weather/python/index.html
+Online documentation is available: http://mickey.cs.vt.edu/realtimeweb/
+
+Explore the repository for your desired language to see more detailed docs.
