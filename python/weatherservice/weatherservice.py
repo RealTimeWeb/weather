@@ -449,8 +449,7 @@ def get_report_by_latlng(latitude,longitude):
             json_result = _from_json(result)
         except ValueError:
             raise WeatherException("This city was outside of the continental United States.")
-        report = Report._from_json(json_result)
-        return report
+        return Report._from_json(json_result)
     else:
         if _CONNECTED:
             raise WeatherException("No response from the server.")
