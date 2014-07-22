@@ -321,11 +321,14 @@ class Forecast(object):
         :type json_data: dict
         :returns: Forecast
         """
-        return map(Forecast, json_data['time']['startPeriodName'],
+        map(_parse_int, json_data['data']['temperature'])
+        map(_parse_int, json_data['data']['pop'])
+
+        return Forecast(json_data['time']['startPeriodName'],
                     json_data['time']['startValidTime'],
                     json_data['time']['tempLabel'],
-                    map(_parse_int, json_data['data']['temperature']),
-                    map(_parse_int, json_data['data']['pop']),
+                    json_data['data']['temperature'],
+                    json_data['data']['pop'],
                     json_data['data']['weather'],
                     json_data['data']['iconLink'],
                     json_data['data']['text'])
@@ -523,7 +526,7 @@ def get_temperature(address):
     :return: an int temperature
     """
     report = get_report(address)
-    return report["currentobservation"]["Temp"]
+    return report.weather.temp
 
 
 def get_forecasts(address):
@@ -536,6 +539,6 @@ def get_forecasts(address):
     """
 
     report = get_report(address)
-    templist = report["data"]["temperature"]
+    templist = report.forecasts.temperature
     highslist = templist[::2]
     return highslist

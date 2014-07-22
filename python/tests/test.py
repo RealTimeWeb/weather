@@ -1,5 +1,5 @@
-import weatherservice.weatherservice as weatherservice
 import unittest
+from python.weatherservice import weatherservice
 
 class TestWeatherServiceOnline(unittest.TestCase):
     def setUp(self):
@@ -44,6 +44,18 @@ class TestWeatherServiceOffline(unittest.TestCase):
     def test_newark(self):
         report = weatherservice.get_report("newark, de")
         self.assertIsInstance(report, weatherservice.Report)
-        
+
+
+class TestWeatherServiceForecast(unittest.TestCase):
+    def setUp(self):
+        weatherservice.connect()
+
+    def test_temperature(self):
+        print(weatherservice.get_temperature("2202 Kraft Drive, Blacksburg, "
+                                             "VA"))
+
+    def test_forecasts(self):
+        print(weatherservice.get_forecasts("2202 Kraft Drive, Blacksburg, "
+                                             "VA"))
 if __name__ == '__main__':
     unittest.main()
