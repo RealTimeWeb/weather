@@ -512,3 +512,15 @@ def get_report(address):
         return get_report_by_latlng(latitude, longitude)
     else:
         raise GeocodeException(GEOCODE_ERRORS.get(status, "Unknown error occurred: "+status))
+
+
+def get_temperature(address):
+    """
+    Gets the current temperature
+
+    :param str address: A location (e.g., "Newark, DE") somewhere in the
+    United States
+    :return: an int temperature
+    """
+    report = get_report(address)
+    return report["currentobservation"]["Temp"]
