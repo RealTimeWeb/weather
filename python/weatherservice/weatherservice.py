@@ -524,3 +524,18 @@ def get_temperature(address):
     """
     report = get_report(address)
     return report["currentobservation"]["Temp"]
+
+
+def get_forecasts(address):
+    """
+    Gets the high temperatures for the time period
+
+    :param str address: A location (e.g., "Newark, DE") somewhere in the
+    United States
+    :return list: a list of ints
+    """
+
+    report = get_report(address)
+    templist = report["data"]["temperature"]
+    highslist = templist[::2]
+    return highslist
