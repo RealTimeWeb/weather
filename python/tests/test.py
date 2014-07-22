@@ -51,11 +51,13 @@ class TestWeatherServiceForecast(unittest.TestCase):
         weatherservice.connect()
 
     def test_temperature(self):
-        print(weatherservice.get_temperature("2202 Kraft Drive, Blacksburg, "
-                                             "VA"))
+        self.assertIsInstance(weatherservice.get_temperature("2202 Kraft "
+                                                             "Drive, Blacksburg, "
+                                                             "VA"), int)
 
     def test_forecasts(self):
-        print(weatherservice.get_forecasts("2202 Kraft Drive, Blacksburg, "
-                                             "VA"))
+        self.assertIsInstance(weatherservice.get_forecasts("2202 Kraft Drive, "
+                                                           "Blacksburg, "
+                                                           "VA"), list)
 if __name__ == '__main__':
     unittest.main()
