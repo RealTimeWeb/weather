@@ -691,6 +691,38 @@ def get_report(address):
         return get_report_by_latlng(latitude, longitude)
     else:
         raise GeocodeException(GEOCODE_ERRORS.get(status, "Unknown error occurred: "+status))
+        
+def get_temperature(address):
+    """
+    Gets the current temperature
+
+    :param str address: A location (e.g., "Newark, DE") somewhere in the
+    United States
+    :return: an int temperature
+    """
+    report = get_report(address)
+    if _USE_CLASSES:
+        return report.weather.temp
+    else:
+        return report['weather']['temp']
+
+
+def get_forecasts(address):
+    """
+    Gets the high temperatures for the time period
+
+    :param str address: A location (e.g., "Newark, DE") somewhere in the
+    United States
+    :return list: a list of ints
+    """
+
+    report = get_report(address)
+    if _USE_CLASSES:
+        templist = [f.temperature for f in report.forecasts]
+    else:
+        templist = [f['temperature'] for f in report['forecasts']]
+    highslist = templist[::2]
+    return highslist
 
 _load_from_string(zlib.decompress(base64.b64decode(
 	'''eJztfQ13oziW9l/RZs87s3vGoZAECNJdPSeVpD6mk1ROJd3V3ZM+fYhNYqYweAFXOj3'''

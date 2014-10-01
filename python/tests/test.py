@@ -59,6 +59,20 @@ class TestWeatherServiceOffline(unittest.TestCase):
         weatherservice._USE_CLASSES = True
         report = weatherservice.get_report("newark, de")
         self.assertIsInstance(report, weatherservice.Report)
-        
+
+
+class TestWeatherServiceForecast(unittest.TestCase):
+    def setUp(self):
+        weatherservice.connect()
+
+    def test_temperature(self):
+        self.assertIsInstance(weatherservice.get_temperature("2202 Kraft "
+                                                             "Drive, Blacksburg, "
+                                                             "VA"), int)
+
+    def test_forecasts(self):
+        self.assertIsInstance(weatherservice.get_forecasts("2202 Kraft Drive, "
+                                                           "Blacksburg, "
+                                                           "VA"), list)
 if __name__ == '__main__':
     unittest.main()
